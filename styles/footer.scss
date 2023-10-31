@@ -1,0 +1,14 @@
+@import "variables.scss";
+
+.footer {
+    text-align: center;
+    margin: 20px 0px;
+    font-family: $font-family;
+    font-size: 14px;
+}
+
+@media (max-width: 768px) {
+    .footer {
+        font-size: 12px;
+    }
+}

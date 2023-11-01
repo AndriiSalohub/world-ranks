@@ -1,12 +1,37 @@
+@import "./variables.scss";
 html {
     height: 100%;
 }
+
 body {
-    min-height: 100%;
-    display: grid;
-    grid-template-rows: 1fr auto;
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    font-family: $font-family;
+    align-items: center;
 }
+
+.header {
+    flex: 0 0 auto;
+}
+
+.main {
+    flex: 1 0 auto;
+    width: 50%;
+}
+
 .footer {
-    grid-row-start: 2;
-    grid-row-end: 3;
+    flex: 0 0 auto;
+}
+
+@media (max-width: 1024px) {
+    .main {
+        width: 65%;
+    }
+}
+
+@media (max-width: 550px) {
+    .main {
+        width: 90%;
+    }
 }

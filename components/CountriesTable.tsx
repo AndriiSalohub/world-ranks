@@ -5,7 +5,7 @@ import { FC } from "react";
 
 const CountriesTable: FC = () => {
     const countries = useCountries((state) => state.countries);
-    console.log(countries);
+
     return (
         <section className="countries-table">
             <button className="countries-table__buttons">
@@ -18,9 +18,12 @@ const CountriesTable: FC = () => {
             </button>
             <ul className="countries-table__list">
                 {countries.map((country) => (
-                    <li className="countries-table__list__item">
+                    <li
+                        className="countries-table__list__item"
+                        key={country.name.common}
+                    >
                         <p className="countries-table__list__item-name">
-                            {country.name.common}
+                            {country.name.official}
                         </p>
                         <p className="countries-table__list__item-population">
                             {country.population}

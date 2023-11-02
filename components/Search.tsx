@@ -1,5 +1,6 @@
 "use client";
 
+import { Country } from "@/models/coutries";
 import { useCountries } from "@/store/store";
 import "@/styles/search.scss";
 import { SearchRounded } from "@material-ui/icons";
@@ -15,7 +16,11 @@ const Search: FC = () => {
                 await fetch("https://restcountries.com/v3.1/all")
             ).json();
 
-            setCountries(countries);
+            setCountries(
+                countries.sort((a: Country, b: Country) =>
+                    a.name.official > b.name.official ? 1 : -1
+                )
+            );
         };
 
         getCounties();

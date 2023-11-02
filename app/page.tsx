@@ -1,3 +1,4 @@
+import CountriesTable from "@/components/CountriesTable";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import Search from "@/components/Search";
@@ -11,6 +12,7 @@ const Home: FC = () => {
             <Header />
             <main className="main">
                 <Search />
+                <CountriesTable />
             </main>
             <Footer />
         </>

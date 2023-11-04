@@ -1,3 +1,4 @@
+import ReduxToolkitProvide from "@/redux-toolkit/provider";
 import "@/styles/reset.scss";
 import type { Metadata } from "next";
 import { FC, ReactNode } from "react";
@@ -15,7 +16,9 @@ export const metadata: Metadata = {
 const RootLayout: FC<IProps> = ({ children }) => {
     return (
         <html lang="en">
-            <body>{children}</body>
+            <body>
+                <ReduxToolkitProvide>{children}</ReduxToolkitProvide>
+            </body>
         </html>
     );
 };

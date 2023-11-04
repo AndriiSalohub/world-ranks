@@ -1,11 +1,10 @@
 "use client";
-import { useCountries } from "@/store/store";
+import { useGetAllCountriesQuery } from "@/redux-toolkit/slices/countryApi";
 import "@/styles/countries-table.scss";
 import { FC } from "react";
 
 const CountriesTable: FC = () => {
-    const countries = useCountries((state) => state.countries);
-    console.log(countries);
+    const { data } = useGetAllCountriesQuery(0);
 
     return (
         <section className="countries-table">
@@ -23,7 +22,7 @@ const CountriesTable: FC = () => {
                 </button>
             </div>
             <ul className="countries-table__list">
-                {countries.map((country) => (
+                {data?.map((country) => (
                     <li
                         className="countries-table__list__item"
                         key={country.name.common}

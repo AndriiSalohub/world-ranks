@@ -1,38 +1,14 @@
 "use client";
 
-import { Country } from "@/models/coutries";
-import { useCountries } from "@/store/store";
 import "@/styles/search.scss";
 import { SearchRounded } from "@material-ui/icons";
-import { FC, useEffect } from "react";
+import { FC } from "react";
 
 const Search: FC = () => {
-    const setCountries = useCountries((state) => state.setCountries);
-    const countries = useCountries((state) => state.countries);
-
-    useEffect(() => {
-        const getCounties = async () => {
-            const countries = await (
-                await fetch("https://restcountries.com/v3.1/all")
-            ).json();
-
-            setCountries(
-                countries.sort((a: Country, b: Country) =>
-                    a.name.official > b.name.official ? 1 : -1
-                )
-            );
-        };
-
-        getCounties();
-        console.log(countries);
-    }, []);
-
     return (
         <>
             <section className="search">
-                <h1 className="search__title">
-                    Found {countries.length} countries
-                </h1>
+                <h1 className="search__title">Found 250 countries</h1>
                 <div className="search__wrapper">
                     <SearchRounded color="inherit" />
                     <input

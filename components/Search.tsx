@@ -1,7 +1,6 @@
 "use client";
 
 import "@/styles/search.scss";
-import { SearchRounded } from "@material-ui/icons";
 import { FC } from "react";
 
 const Search: FC = () => {
@@ -10,7 +9,10 @@ const Search: FC = () => {
             <section className="search">
                 <h1 className="search__title">Found 250 countries</h1>
                 <div className="search__wrapper">
-                    <SearchRounded color="inherit" />
+                    <img
+                        src="https://i.ibb.co/0nyxWXQ/search-1.png"
+                        alt="search loop"
+                    />
                     <input
                         className="search__input"
                         type="text"

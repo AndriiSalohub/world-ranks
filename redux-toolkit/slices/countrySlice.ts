@@ -26,59 +26,94 @@ export const countriesSlice = createSlice({
         fetchCountries: (state, action: PayloadAction<Countries>) => {
             state.countries = action.payload;
         },
-        // sortFetchedCountries: (state) => {
-        //     state.countries = state.countries.sort((a, b) =>
-        //         a.name.official > b.name.official ? 1 : -1
-        //     );
-        // },
         changeNameSort: (state) => {
             switch (state.sortName) {
                 case "default":
-                    (state.sortedCountries = [...state.countries].sort((a, b) =>
+                    state.sortedCountries = [...state.countries].sort((a, b) =>
                         a.name.official < b.name.official ? 1 : -1
-                    )),
-                        (state.sortName = "fromLastLetter");
+                    );
+                    state.sortName = "fromLastLetter";
+                    state.sortPopulation = "default";
+                    state.sortArea = "default";
                     state.isSorted = true;
                     break;
                 case "fromLastLetter":
-                    (state.sortedCountries = [...state.countries].sort((a, b) =>
+                    state.sortedCountries = [...state.countries].sort((a, b) =>
                         a.name.official > b.name.official ? 1 : -1
-                    )),
-                        (state.sortName = "fromFirstLetter");
+                    );
+                    state.sortName = "fromFirstLetter";
+                    state.sortPopulation = "default";
+                    state.sortArea = "default";
                     state.isSorted = true;
                     break;
                 default:
                     state.isSorted = false;
                     state.sortName = "default";
+                    state.sortPopulation = "default";
+                    state.sortArea = "default";
             }
         },
         changePopulationSort: (state) => {
             switch (state.sortPopulation) {
                 case "default":
-                    state.sortedCountries = [...state.countries].sort(
-                        (a, b) => a.population - b.population
+                    state.sortedCountries = [...state.countries].sort((a, b) =>
+                        a.population > b.population ? 1 : -1
                     );
                     state.sortName = "default";
+                    state.sortArea = "default";
                     state.sortPopulation = "fromTheGreatest";
                     state.isSorted = true;
                     break;
                 case "fromTheGreatest":
                     state.sortedCountries = [...state.countries].sort((a, b) =>
-                        a.population - b.population ? -1 : 1
+                        a.population > b.population ? -1 : 1
                     );
                     state.sortName = "default";
+                    state.sortArea = "default";
                     state.sortPopulation = "fromTheLowest";
                     state.isSorted = true;
                     break;
                 default:
                     state.isSorted = false;
-                    state.sortPopulation = "default";
                     state.sortName = "default";
+                    state.sortPopulation = "default";
+                    state.sortArea = "default";
+            }
+        },
+        changeAreaSort: (state) => {
+            switch (state.sortArea) {
+                case "default":
+                    state.sortedCountries = [...state.countries].sort((a, b) =>
+                        a.area > b.area ? 1 : -1
+                    );
+                    state.sortName = "default";
+                    state.sortPopulation = "default";
+                    state.sortArea = "fromTheGreatest";
+                    state.isSorted = true;
+                    break;
+                case "fromTheGreatest":
+                    state.sortedCountries = [...state.countries].sort((a, b) =>
+                        a.area > b.area ? -1 : 1
+                    );
+                    state.sortName = "default";
+                    state.sortPopulation = "default";
+                    state.sortArea = "fromTheLowest";
+                    state.isSorted = true;
+                    break;
+                default:
+                    state.isSorted = false;
+                    state.sortName = "default";
+                    state.sortPopulation = "default";
+                    state.sortArea = "default";
             }
         },
     },
 });
 
-export const { fetchCountries, changeNameSort, changePopulationSort } =
-    countriesSlice.actions;
+export const {
+    fetchCountries,
+    changeNameSort,
+    changePopulationSort,
+    changeAreaSort,
+} = countriesSlice.actions;
 export const countryReducer = countriesSlice.reducer;

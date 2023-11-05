@@ -4,8 +4,8 @@ import { useAppDispatch, useAppSelector } from "@/hooks/redux-toolkit";
 import { useGetAllCountriesQuery } from "@/redux-toolkit/slices/countryApi";
 import {
     changeNameSort,
+    changePopulationSort,
     fetchCountries,
-    sortFetchedCountries,
 } from "@/redux-toolkit/slices/countrySlice";
 import "@/styles/countries-table.scss";
 import { KeyboardArrowDown, KeyboardArrowUp } from "@material-ui/icons";
@@ -15,10 +15,12 @@ import Table from "./Table";
 const CountriesTable: FC = () => {
     const dispatch = useAppDispatch();
     const { data, isLoading, isError } = useGetAllCountriesQuery(0);
-    const nameSort = useAppSelector((state) => state.countries.sortName);
+    const { sortName, sortPopulation } = useAppSelector(
+        (state) => state.countries
+    );
     useEffect(() => {
         dispatch(fetchCountries(data || []));
-        dispatch(sortFetchedCountries());
+        // dispatch(sortFetchedCountries());
     }, [data]);
 
     return (
@@ -32,7 +34,7 @@ const CountriesTable: FC = () => {
                         Name
                     </p>
                     <div className="countries-table__button_icon">
-                        {nameSort === "default" ? null : nameSort ===
+                        {sortName === "default" ? null : sortName ===
                           "fromLastLetter" ? (
                             <KeyboardArrowDown color="inherit" />
                         ) : (
@@ -41,9 +43,21 @@ const CountriesTable: FC = () => {
                     </div>
                 </button>
                 <button className="countries-table__button">
-                    <p className="countries-table__buttons_population">
+                    <p
+                        className="countries-table__buttons_population"
+                        onClick={() => dispatch(changePopulationSort())}
+                    >
                         Population
                     </p>
+                    <div className="countries-table__button_icon">
+                        {sortPopulation ===
+                        "default" ? null : sortPopulation ===
+                          "fromTheGreatest" ? (
+                            <KeyboardArrowDown color="inherit" />
+                        ) : (
+                            <KeyboardArrowUp color="inherit" />
+                        )}
+                    </div>
                 </button>
                 <button className="countries-table__button">
                     <p className="countries-table__buttons_area">Area(km^2)</p>

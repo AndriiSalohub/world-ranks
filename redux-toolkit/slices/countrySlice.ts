@@ -1,4 +1,4 @@
-import { Countries } from "@/models/coutries";
+import { Countries } from "@/models/countries";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 interface IState {

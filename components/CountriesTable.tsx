@@ -21,7 +21,6 @@ const CountriesTable: FC = () => {
     );
     useEffect(() => {
         dispatch(fetchCountries(data || []));
-        // dispatch(sortFetchedCountries());
     }, [data]);
 
     return (
@@ -77,7 +76,7 @@ const CountriesTable: FC = () => {
                     </div>
                 </button>
             </div>
-            {isError ? <h2>Ops...Something went wrong</h2> : <Table />}
+            {isError ? <h2>Ops...Something went wrong</h2> : null}
             {isLoading ? <h2>Loading...</h2> : <Table />}
         </section>
     );

@@ -1,13 +1,17 @@
 "use client";
 
+import { useAppSelector } from "@/hooks/redux-toolkit";
 import "@/styles/search.scss";
 import { FC } from "react";
 
 const Search: FC = () => {
+    const countries = useAppSelector((state) => state.countries.countries);
     return (
         <>
             <section className="search">
-                <h1 className="search__title">Found 250 countries</h1>
+                <h1 className="search__title">
+                    Found {countries.length} countries
+                </h1>
                 <div className="search__wrapper">
                     <img
                         src="https://i.ibb.co/0nyxWXQ/search-1.png"

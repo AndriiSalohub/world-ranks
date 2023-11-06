@@ -1,64 +1,68 @@
 "use client";
 
 import { useAppSelector } from "@/hooks/redux-toolkit";
-import { Country } from "@/models/coutries";
+import { Country } from "@/models/countries";
+import Link from "next/link";
 
 const Table = () => {
     const { countries, sortedCountries, isSorted } = useAppSelector(
         (state) => state.countries
     );
 
-    console.log(countries);
     return (
         <ul className="countries-table__list">
             {isSorted
                 ? sortedCountries?.map((country: Country) => (
-                      <li
-                          className="countries-table__list__item"
+                      <Link
+                          href={`/country/${country.name.official}`}
                           key={country.name.common}
                       >
-                          <div className="countries-table__list__item_description">
-                              <img
-                                  src={country.flags.png}
-                                  alt={country.flags.alt}
-                                  className="countries-table__list__item_flag-img"
-                              />
-                              <p className="countries-table__list__item_name">
-                                  {" "}
-                                  {country.name.official}
+                          <li className="countries-table__list__item">
+                              <div className="countries-table__list__item_description">
+                                  <img
+                                      src={country.flags.png}
+                                      alt={country.flags.alt}
+                                      className="countries-table__list__item_flag-img"
+                                  />
+                                  <p className="countries-table__list__item_name">
+                                      {" "}
+                                      {country.name.official}
+                                  </p>
+                              </div>
+                              <p className="countries-table__list__item_population">
+                                  {country.population}
                               </p>
-                          </div>
-                          <p className="countries-table__list__item_population">
-                              {country.population}
-                          </p>
-                          <p className="countries-table__list__item_area">
-                              {country.area}
-                          </p>
-                      </li>
+                              <p className="countries-table__list__item_area">
+                                  {country.area}
+                              </p>
+                          </li>
+                      </Link>
                   ))
                 : countries?.map((country: Country) => (
-                      <li
-                          className="countries-table__list__item"
+                      <Link
+                          href={`/country/${country.name.official}`}
                           key={country.name.common}
                       >
-                          <div className="countries-table__list__item_description">
-                              <img
-                                  src={country.flags.png}
-                                  alt={country.flags.alt}
-                                  className="countries-table__list__item_flag-img"
-                              />
-                              <p className="countries-table__list__item_name">
-                                  {" "}
-                                  {country.name.official}
+                          <li className="countries-table__list__item">
+                              <div className="countries-table__list__item_description">
+                                  <img
+                                      src={country.flags.png}
+                                      alt={country.flags.alt}
+                                      className="countries-table__list__item_flag-img"
+                                  />
+                                  <p className="countries-table__list__item_name">
+                                      {" "}
+                                      {country.name.official}
+                                  </p>
+                              </div>
+                              <p className="countries-table__list__item_population">
+                                  {country.population}
                               </p>
-                          </div>
-                          <p className="countries-table__list__item_population">
-                              {country.population}
-                          </p>
-                          <p className="countries-table__list__item_area">
-                              {country.area}
-                          </p>
-                      </li>
+                              <p className="countries-table__list__item_area">
+                                  {country.area}
+                              </p>
+                          </li>
+                      </Link>
                   ))}
         </ul>
     );

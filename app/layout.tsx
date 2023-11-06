@@ -1,5 +1,8 @@
+import Footer from "@/components/Footer";
+import Header from "@/components/Header";
 import ReduxToolkitProvide from "@/redux-toolkit/provider";
 import "@/styles/reset.scss";
+import "@/styles/variables.scss";
 import type { Metadata } from "next";
 import { FC, ReactNode } from "react";
 
@@ -17,7 +20,9 @@ const RootLayout: FC<IProps> = ({ children }) => {
     return (
         <html lang="en">
             <body>
+                <Header />
                 <ReduxToolkitProvide>{children}</ReduxToolkitProvide>
+                <Footer />
             </body>
         </html>
     );

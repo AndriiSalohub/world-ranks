@@ -1,4 +1,4 @@
-import { Countries } from "@/models/coutries";
+import { Countries } from "@/models/countries";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const countryApi = createApi({
@@ -12,7 +12,12 @@ export const countryApi = createApi({
                 url: `all`,
             }),
         }),
+        getSingleCountry: build.query<Countries, string>({
+            query: (name) => ({
+                url: `name/${name}`,
+            }),
+        }),
     }),
 });
 
-export const { useGetAllCountriesQuery } = countryApi;
+export const { useGetAllCountriesQuery, useGetSingleCountryQuery } = countryApi;

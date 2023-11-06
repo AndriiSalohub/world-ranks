@@ -28,6 +28,9 @@
         }
     }
     &__list {
+        & a {
+            text-decoration: none;
+        }
         &__item {
             color: $text-color;
             text-align: center;

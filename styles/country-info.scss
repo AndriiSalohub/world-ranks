@@ -35,4 +35,40 @@
             }
         }
     }
+    &__detailed {
+        padding: 20px 40px;
+        box-shadow: $box-shadow;
+        &__title {
+            color: $text-color;
+            margin-bottom: 5px;
+        }
+        &__list {
+            &__item {
+                padding: 20px 0px;
+                display: flex;
+                font-size: 16px;
+                justify-content: space-between;
+                border-bottom: 1px solid $text-color-secondary;
+                &_title {
+                    color: $text-color-secondary;
+                }
+                &_info {
+                    color: $text-color;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 900px) {
+    .country-info {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(2, 1fr);
+        &__basic {
+            &__image {
+                display: block;
+                margin: 0 auto;
+            }
+        }
+    }
 }

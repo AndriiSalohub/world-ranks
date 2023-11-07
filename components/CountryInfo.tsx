@@ -40,6 +40,51 @@ const CountryInfo: FC<IProps> = ({ country }) => {
                     </div>
                 </div>
             </div>
+            <div className="country-info__detailed">
+                <h2 className="country-info__detailed__title">Details</h2>
+                <ul className="country-info__detailed__list">
+                    <li className="country-info__detailed__list__item">
+                        <p className="country-info__detailed__list__item_title">
+                            Capital
+                        </p>
+                        <p className="country-info__detailed__list__item_info">
+                            {country[0].capital}
+                        </p>
+                    </li>
+                    <li className="country-info__detailed__list__item">
+                        <p className="country-info__detailed__list__item_title">
+                            Languages
+                        </p>
+                        <p className="country-info__detailed__list__item_info">
+                            {Object.values(country[0].languages || {}).join(
+                                ", "
+                            )}
+                        </p>
+                    </li>
+                    <li className="country-info__detailed__list__item">
+                        <p className="country-info__detailed__list__item_title">
+                            Currencies
+                        </p>
+                        <p className="country-info__detailed__list__item_info">
+                            {Object.values(country[0].currencies || {})
+                                .map(({ name }) => name)
+                                .join(", ")}
+                        </p>
+                    </li>
+                    <li className="country-info__detailed__list__item">
+                        <p className="country-info__detailed__list__item_title">
+                            Native name
+                        </p>
+                        <p className="country-info__detailed__list__item_info">
+                            {
+                                Object.values(
+                                    country[0].name.nativeName || []
+                                )[0].official
+                            }
+                        </p>
+                    </li>
+                </ul>
+            </div>
         </section>
     );
 };

@@ -5,65 +5,37 @@ import { Country } from "@/models/countries";
 import Link from "next/link";
 
 const Table = () => {
-    const { countries, sortedCountries, isSorted } = useAppSelector(
-        (state) => state.countries
-    );
+    const { orderedCountries } = useAppSelector((state) => state.countries);
 
     return (
         <ul className="countries-table__list">
-            {isSorted
-                ? sortedCountries?.map((country: Country) => (
-                      <Link
-                          href={`/country/${country.name.official}`}
-                          key={country.name.common}
-                      >
-                          <li className="countries-table__list__item">
-                              <div className="countries-table__list__item_description">
-                                  <img
-                                      src={country.flags.png}
-                                      alt={country.flags.alt}
-                                      className="countries-table__list__item_flag-img"
-                                  />
-                                  <p className="countries-table__list__item_name">
-                                      {" "}
-                                      {country.name.official}
-                                  </p>
-                              </div>
-                              <p className="countries-table__list__item_population">
-                                  {country.population}
-                              </p>
-                              <p className="countries-table__list__item_area">
-                                  {country.area}
-                              </p>
-                          </li>
-                      </Link>
-                  ))
-                : countries?.map((country: Country) => (
-                      <Link
-                          href={`/country/${country.name.official}`}
-                          key={country.name.common}
-                      >
-                          <li className="countries-table__list__item">
-                              <div className="countries-table__list__item_description">
-                                  <img
-                                      src={country.flags.png}
-                                      alt={country.flags.alt}
-                                      className="countries-table__list__item_flag-img"
-                                  />
-                                  <p className="countries-table__list__item_name">
-                                      {" "}
-                                      {country.name.official}
-                                  </p>
-                              </div>
-                              <p className="countries-table__list__item_population">
-                                  {country.population}
-                              </p>
-                              <p className="countries-table__list__item_area">
-                                  {country.area}
-                              </p>
-                          </li>
-                      </Link>
-                  ))}
+            {" "}
+            {orderedCountries.map((country: Country) => (
+                <Link
+                    href={`/country/${country.name.official}`}
+                    key={country.name.common}
+                >
+                    <li className="countries-table__list__item">
+                        <div className="countries-table__list__item_description">
+                            <img
+                                src={country.flags.png}
+                                alt={country.flags.alt}
+                                className="countries-table__list__item_flag-img"
+                            />
+                            <p className="countries-table__list__item_name">
+                                {" "}
+                                {country.name.official}
+                            </p>
+                        </div>
+                        <p className="countries-table__list__item_population">
+                            {country.population}
+                        </p>
+                        <p className="countries-table__list__item_area">
+                            {country.area}
+                        </p>
+                    </li>
+                </Link>
+            ))}
         </ul>
     );
 };

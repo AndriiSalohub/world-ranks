@@ -1,10 +1,11 @@
 "use client";
 
-import { useAppSelector } from "@/hooks/redux-toolkit";
+import { useAppDispatch, useAppSelector } from "@/hooks/redux-toolkit";
 import "@/styles/search.scss";
 import { FC } from "react";
 
 const Search: FC = () => {
+    const dispatch = useAppDispatch();
     const countries = useAppSelector((state) => state.countries.countries);
     return (
         <>

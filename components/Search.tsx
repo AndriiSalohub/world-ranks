@@ -1,6 +1,7 @@
 "use client";
 
 import { useAppDispatch, useAppSelector } from "@/hooks/redux-toolkit";
+import { search } from "@/redux-toolkit/slices/countrySlice";
 import "@/styles/search.scss";
 import { FC } from "react";
 
@@ -22,6 +23,9 @@ const Search: FC = () => {
                         className="search__input"
                         type="text"
                         placeholder="Filter by Name, Region or Subregion"
+                        onChange={(e) =>
+                            dispatch(search(e.target.value.toLowerCase()))
+                        }
                     />
                 </div>
             </section>

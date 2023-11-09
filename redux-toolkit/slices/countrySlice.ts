@@ -6,6 +6,7 @@ interface IState {
     orderedCountries: Countries;
     direction: string;
     value: string;
+    searchVal: string;
 }
 
 const initialState: IState = {
@@ -13,6 +14,7 @@ const initialState: IState = {
     orderedCountries: [],
     direction: "",
     value: "",
+    searchVal: "",
 };
 
 export const countriesSlice = createSlice({
@@ -33,60 +35,96 @@ export const countriesSlice = createSlice({
                 state.direction = "ascent";
                 switch (action.payload[1]) {
                     case "name":
-                        state.orderedCountries = [...state.countries].sort(
-                            (a, b) =>
-                                a.name.official > b.name.official ? 1 : -1
+                        state.orderedCountries = [
+                            ...state.orderedCountries,
+                        ].sort((a, b) =>
+                            a.name.official > b.name.official ? 1 : -1
                         );
                         state.value = "name";
                         break;
                     case "population":
-                        state.orderedCountries = [...state.countries].sort(
-                            (a, b) => (a.population > b.population ? 1 : -1)
+                        state.orderedCountries = [
+                            ...state.orderedCountries,
+                        ].sort((a, b) =>
+                            a.population > b.population ? 1 : -1
                         );
                         state.value = "population";
                         break;
                     case "area":
-                        state.orderedCountries = [...state.countries].sort(
-                            (a, b) => (a.area > b.area ? 1 : -1)
-                        );
+                        state.orderedCountries = [
+                            ...state.orderedCountries,
+                        ].sort((a, b) => (a.area > b.area ? 1 : -1));
                         state.value = "area";
                         break;
                     default:
-                        state.orderedCountries = [...state.countries];
+                        state.orderedCountries = [...state.orderedCountries];
                 }
             } else if (action.payload[0] === "descent") {
                 state.direction = "descent";
                 switch (action.payload[1]) {
                     case "name":
-                        state.orderedCountries = [...state.countries].sort(
-                            (a, b) =>
-                                a.name.official > b.name.official ? -1 : 1
+                        state.orderedCountries = [
+                            ...state.orderedCountries,
+                        ].sort((a, b) =>
+                            a.name.official > b.name.official ? -1 : 1
                         );
                         state.value = "name";
                         break;
                     case "population":
-                        state.orderedCountries = [...state.countries].sort(
-                            (a, b) => (a.population > b.population ? -1 : 1)
+                        state.orderedCountries = [
+                            ...state.orderedCountries,
+                        ].sort((a, b) =>
+                            a.population > b.population ? -1 : 1
                         );
                         state.value = "population";
                         break;
                     case "area":
-                        state.orderedCountries = [...state.countries].sort(
-                            (a, b) => (a.area > b.area ? -1 : 1)
-                        );
+                        state.orderedCountries = [
+                            ...state.orderedCountries,
+                        ].sort((a, b) => (a.area > b.area ? -1 : 1));
                         state.value = "area";
                         break;
                     default:
-                        state.orderedCountries = [...state.countries];
+                        state.orderedCountries = [...state.orderedCountries];
                 }
             } else {
                 state.direction = "";
                 state.value = "";
-                state.orderedCountries = [...state.countries];
+                if (state.searchVal !== "") {
+                    state.orderedCountries = [
+                        ...state.countries.filter((country) => {
+                            for (
+                                let i = 0;
+                                i < state.orderedCountries.length;
+                                i++
+                            ) {
+                                if (
+                                    country.name.official ===
+                                    state.orderedCountries[i].name.official
+                                ) {
+                                    return country;
+                                }
+                            }
+                        }),
+                    ];
+                } else {
+                    state.orderedCountries = [...state.countries];
+                }
             }
+        },
+        search: (state, action: PayloadAction<string>) => {
+            state.searchVal = action.payload;
+            state.orderedCountries = state.countries.filter(
+                (country) =>
+                    country.name.official
+                        .toLowerCase()
+                        .includes(action.payload) ||
+                    country.region.toLocaleLowerCase().includes(action.payload)
+            );
         },
     },
 });
 
-export const { fetchCountries, orderCountries } = countriesSlice.actions;
+export const { fetchCountries, orderCountries, search } =
+    countriesSlice.actions;
 export const countryReducer = countriesSlice.reducer;

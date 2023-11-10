@@ -1,3 +1,13 @@
+@import "./variables.scss";
+
 .header {
     margin: 20px auto;
+}
+
+.theme-switcher {
+    background: none;
+    outline: none;
+    border: none;
+
+    color: $text-color-secondary;
 }

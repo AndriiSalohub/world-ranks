@@ -1,5 +1,6 @@
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import ThemeLayout from "@/components/ThemeLayout";
 import ReduxToolkitProvide from "@/redux-toolkit/provider";
 import "@/styles/reset.scss";
 import "@/styles/variables.scss";
@@ -20,9 +21,13 @@ const RootLayout: FC<IProps> = ({ children }) => {
     return (
         <html lang="en">
             <body>
-                <Header />
-                <ReduxToolkitProvide>{children}</ReduxToolkitProvide>
-                <Footer />
+                <ReduxToolkitProvide>
+                    <ThemeLayout>
+                        <Header />
+                        {children}
+                        <Footer />
+                    </ThemeLayout>
+                </ReduxToolkitProvide>
             </body>
         </html>
     );

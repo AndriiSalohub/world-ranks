@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { countryApi } from "./slices/countryApi";
 import { countryReducer } from "./slices/countrySlice";
+import { themeReducer } from "./slices/themeSlice";
 
 export const store = configureStore({
     reducer: {
         [countryApi.reducerPath]: countryApi.reducer,
         countries: countryReducer,
+        theme: themeReducer,
     },
 
     middleware: (getDefaultMiddleware) =>

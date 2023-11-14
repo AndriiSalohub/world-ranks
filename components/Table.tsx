@@ -2,6 +2,7 @@
 
 import { useAppSelector } from "@/hooks/redux-toolkit";
 import { Country } from "@/models/countries";
+import { motion } from "framer-motion";
 import Link from "next/link";
 
 const Table = () => {
@@ -15,7 +16,12 @@ const Table = () => {
                     href={`/country/${country.name.official}`}
                     key={country.name.common}
                 >
-                    <li className="countries-table__list__item">
+                    <motion.li
+                        className="countries-table__list__item"
+                        whileHover={{
+                            y: -5,
+                        }}
+                    >
                         <div className="countries-table__list__item_description">
                             <img
                                 src={country.flags.png}
@@ -33,7 +39,7 @@ const Table = () => {
                         <p className="countries-table__list__item_area">
                             {country.area}
                         </p>
-                    </li>
+                    </motion.li>
                 </Link>
             ))}
         </ul>
